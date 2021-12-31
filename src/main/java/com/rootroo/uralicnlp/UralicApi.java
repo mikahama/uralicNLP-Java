@@ -27,9 +27,13 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -107,9 +111,11 @@ public class UralicApi {
             TransducerHeader h = new TransducerHeader(charstream);
             TransducerAlphabet a = new TransducerAlphabet(charstream, h.getSymbolCount());
             Transducer transducer;
+            
             if (h.isWeighted()) {
                 transducer = new WeightedTransducer(charstream, h, a);
             } else {
+                
                 transducer = new UnweightedTransducer(charstream, h, a);
             }
             transducerCache.put(languageFolder, transducer);
@@ -190,27 +196,82 @@ public class UralicApi {
     }
 
     public ArrayList<String> lemmatize(String word, String language) throws IOException {
-        return lemmatize(word, language, true, false);
+        return lemmatize(word, language, true, false, false);
     }
 
-    public ArrayList<String> lemmatize(String word, String language, boolean descriptive, boolean dictionaryForms) throws IOException {
+    public ArrayList<String> lemmatize(String word, String language, boolean wordBoundaries) throws IOException {
+        return lemmatize(word, language, true, false, wordBoundaries);
+    }
+
+    public ArrayList<String> lemmatize(String word, String language, boolean descriptive, boolean dictionaryForms, boolean wordBoundaries) throws IOException {
         ArrayList<String> results = new ArrayList<String>();
         HashMap<String, Float> res = analyze(word, language, descriptive, dictionaryForms);
-        for (String r : res.keySet()) {
-            results.add(r);
+
+        String bound = "";
+        if (wordBoundaries) {
+            bound = "|";
         }
-        return results;
+
+        for (String an : res.keySet()) {
+            String lemma;
+            if (language.equals("swe")) {
+                lemma = an.replaceAll("[<].*?[>]", bound);
+                while (lemma.length() > 0 && bound.length() >0 && bound.charAt(0) == lemma.charAt(lemma.length() - 1)) {
+                    lemma = lemma.substring(0, lemma.length() - 1);
+                }
+            } else if (language.equals("ara")) {
+                lemma = StringProcessing.filterArabic(an, true, bound);
+            } else if (language.equals("fin_hist")) {
+                String rege = "(?<=WORD_ID=)[^\\]]*";
+                List<String> allMatches = new ArrayList<String>();
+                Matcher matches;
+                matches = Pattern.compile(rege)
+                        .matcher(an);
+                while (matches.find()) {
+                    allMatches.add(matches.group());
+                }
+                lemma = String.join(bound, allMatches);
+            }else if(an.contains("<") && an.contains(">")){
+                //apertium
+                String[] parts = an.split("\\+");
+                //lemma = bound.join([x.split("<")[0] for x in parts])
+                List<String> lemmaParts = new ArrayList<String>();
+                for(int i =0; i< parts.length; i++){
+                    lemmaParts.add(parts[i].split("<")[0]);
+                }
+                lemma = String.join(bound, lemmaParts);
+            }else{
+                if(an.contains("#") && !an.contains("+Cmp#")){
+                    an = an.replaceAll("#", "+Cmp#");
+                }
+                String[] parts = an.split("\\+Cmp#");
+                List<String> lemmaParts = new ArrayList<String>();
+                for(int i =0; i< parts.length; i++){
+                    String p = parts[i].split("\\+")[0];
+                    if(language.equals("eng")){
+                        p = p.replaceAll("[\\[].*?[\\]]", "");
+                    }
+                    lemmaParts.add(p);
+                }
+                lemma = String.join(bound, lemmaParts);
+                
+            }
+            results.add(lemma);
+        }
+
+        return new ArrayList<String>(
+      new LinkedHashSet<String>(results));
     }
 
     public void supportedLanguages() throws IOException {
         String s = CommonTools.readToString(downloadServerUrl + "supported_languages.json");
         System.out.println(s);
     }
-/*
+    /*
     public String[] dictionarySearch(String word, String language) {
     }
 
     public String[] dictionaryLemmas(String language) {
     }
-*/
+     */
 }
