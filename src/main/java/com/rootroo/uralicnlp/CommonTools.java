@@ -1,6 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+* (C) Mika Hämäläinen 2021 CC BY-NC-ND 4.0
+* Full license https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode
  */
 package com.rootroo.uralicnlp;
 
