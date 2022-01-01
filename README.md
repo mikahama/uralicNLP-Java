@@ -8,7 +8,7 @@ UralicNLP can produce **morphological analyses**, **generate morphological forms
 
 More instructions after the first release...
 
-If you want to use the Constraint Grammar features (*from uralicNLP.cg3 import Cg3*), you will also need to [install VISL CG-3](https://mikalikes.men/how-to-install-visl-cg3-on-mac-windows-and-linux/).
+If you want to use the Constraint Grammar features (com.rootroo.uralicnlp.Cg3), you will also need to [install VISL CG-3](https://mikalikes.men/how-to-install-visl-cg3-on-mac-windows-and-linux/).
 
 ## Download Models
 
