@@ -140,6 +140,9 @@ public class UralicApi {
     public void uninstall(String language) {
         CommonTools.deleteDir(new File(Paths.get(modelPath, language).toString()));
     }
+    
+
+    
 
     private String getModelName(boolean analyzer, boolean descriptive, boolean dictionaryForms) {
         if (analyzer) {

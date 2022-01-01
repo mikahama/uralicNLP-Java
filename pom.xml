@@ -11,7 +11,7 @@
     <name>UralicNLP</name>
   
     <url>https://github.com/mikahama/uralicNLP-java</url>
-    <description>>NLP tools (generation, analysis, lemmatization) for multiple languages: Finnish, Russian, German...</description>
+    <description>NLP tools (generation, analysis, lemmatization) for multiple languages: Finnish, Russian, German...</description>
     <organization>
         <name>Rootroo Ltd</name>
         <url>https://rootroo.com/</url>
@@ -56,9 +56,15 @@
             <artifactId>progressbar</artifactId>
             <version>0.5.5</version>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
     </dependencies>
 
     <build>
+ 
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->

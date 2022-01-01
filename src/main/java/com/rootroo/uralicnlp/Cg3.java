@@ -24,10 +24,10 @@ import java.util.Map;
  */
 public class Cg3 {
 
-    String morphologyLanguages;
-    String cgPath;
-    String language;
-    UralicApi api;
+    private String morphologyLanguages;
+    private String cgPath;
+    private String language;
+    private UralicApi api;
 
     public Cg3(String language, String morphologyLanguages) {
         init(language, morphologyLanguages);
@@ -37,7 +37,7 @@ public class Cg3 {
         this.api = new UralicApi();
         this.morphologyLanguages = morphologyLanguages;
 
-        cgPath = Paths.get(System.getProperty("user.home"), ".uralicnlp", "cg").toString();
+        cgPath = Paths.get(System.getProperty("user.home"), ".uralicnlp",language, "cg").toString();
 
         this.language = language;
     }
@@ -47,15 +47,16 @@ public class Cg3 {
         init(language, language);
     }
     
-    public ArrayList<ArrayList<Cg3Word>> disambiguate(String[] words) throws IOException{
+    public ArrayList<ArrayList<Cg3Word>> disambiguate(List<String> words) throws IOException{
         return disambiguate(words,null,true,true,null,false,null);
     }
 
-    public ArrayList<ArrayList<Cg3Word>> disambiguate(String[] words, String morphology_ignore_after, boolean descriptive, boolean remove_symbols, String temp_file, boolean language_flags, List<HashMap<String, Float>> morphologies) throws IOException {
-        List<String> wordsA = new ArrayList<String>(Arrays.asList(words));
-        wordsA.add("");
-        String hfst_output = parseSentence(wordsA.toArray(new String[0]), morphologyLanguages, morphology_ignore_after, descriptive, remove_symbols, language_flags, morphologies);
+    public ArrayList<ArrayList<Cg3Word>> disambiguate(List<String>  words, String morphology_ignore_after, boolean descriptive, boolean remove_symbols, String temp_file, boolean language_flags, List<HashMap<String, Float>> morphologies) throws IOException {
+        
+        words.add("");
+        String hfst_output = parseSentence(words, morphologyLanguages, morphology_ignore_after, descriptive, remove_symbols, language_flags, morphologies);
         ProcessBuilder pb;
+        
         if (temp_file == null) {
             List<String> commands = new ArrayList<String>();
             commands.add("echo");
@@ -72,6 +73,7 @@ public class Cg3 {
             pb = new ProcessBuilder(commands);
 
         }
+        Map<String, String> envs = pb.environment();
         List<String> commands = new ArrayList<String>();
         commands.add("cg-conv");
         commands.add("-f");
@@ -84,7 +86,7 @@ public class Cg3 {
         ProcessBuilder vislcg3 = new ProcessBuilder(vcommands);
         List builders = Arrays.asList(pb, cg_conv, vislcg3);
         List<Process> processes = ProcessBuilder.startPipeline(builders);
-
+        
         Process last = processes.get(processes.size() - 1);
 
         int BUFFER_SIZE = 1024;
@@ -92,21 +94,21 @@ public class Cg3 {
         BufferedReader br = new BufferedReader(new InputStreamReader(last.getInputStream()), BUFFER_SIZE);
         String str;
         while ((str = br.readLine()) != null) {
-            cg_results += str;
+            cg_results += str + "\n";
+            
         }
-
         return parseCgResults(cg_results);
     }
 
-    private String parseSentence(String[] words, String language, String morphology_ignore_after, boolean descriptive, boolean remove_symbols, boolean language_flags, List<HashMap<String, Float>> words_analysis) throws IOException {
+    private String parseSentence(List<String> words, String language, String morphology_ignore_after, boolean descriptive, boolean remove_symbols, boolean language_flags, List<HashMap<String, Float>> words_analysis) throws IOException {
         List<String> sentence = new ArrayList<String>();
-        if (words_analysis != null && words_analysis.size() < words.length) {
+        if (words_analysis != null && words_analysis.size() < words.size()) {
             HashMap<String, Float> e = new HashMap<String, Float>();
             words_analysis.add(e);
         }
 
-        for (int i = 0; i < words.length; i++) {
-            String word = words[i];
+        for (int i = 0; i < words.size(); i++) {
+            String word = words.get(i);
             HashMap<String, Float> existingAnalysis = null;
             if (words_analysis != null) {
                 existingAnalysis = words_analysis.get(i);
