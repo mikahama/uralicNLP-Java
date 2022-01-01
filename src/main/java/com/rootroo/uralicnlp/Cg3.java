@@ -29,9 +29,9 @@ public class Cg3 {
     private String language;
     private UralicApi api;
 
-    public Cg3(String language, String morphologyLanguages) {
-        init(language, morphologyLanguages);
-    }
+    //public Cg3(String language, String morphologyLanguages) {
+    //    init(language, morphologyLanguages);
+    //}
 
     private void init(String language, String morphologyLanguages) {
         this.api = new UralicApi();

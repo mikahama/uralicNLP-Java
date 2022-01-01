@@ -44,19 +44,39 @@ public class UralicApi {
     private String modelPath;
     private String downloadServerUrl = "https://models.uralicnlp.com/nightly/";
     private HashMap<String, Transducer> transducerCache = new HashMap<>();
-
+ 
+    /**
+     * Initializes UralicApi with the default path for models (~/.uralicnlp/)
+     */
     public UralicApi() {
         modelPath = Paths.get(System.getProperty("user.home"), ".uralicnlp").toString();
     }
 
+    /**
+     * Initializes UralicApi with a custom path for models.
+     * @param modelPath Path for downloading and loading models.
+     */
     public UralicApi(String modelPath) {
         this.modelPath = modelPath;
     }
 
+    /**
+     * Downloads all the models for a given language and saves them in the user home directory or a custom path
+     * This method does not throw exceptions if it fails. It's better to distribute the models with your application.
+     * Note: not all languages have all the models, so some errors during the download are to be expected.
+     * @param language ISO code of the language
+     */
     public void download(String language) {
         download(language, true);
     }
 
+    /**
+     * Downloads all the models for a given language and saves them in the user home directory or a custom path
+     * This method does not throw exceptions if it fails. It's better to distribute the models with your application.
+     * Note: not all languages have all the models, so some errors during the download are to be expected.
+     * @param language ISO code of the language
+     * @param showProgress set to false to hide progress
+     */
     public void download(String language, boolean showProgress) {
         HashMap<String, String> urlMap = new HashMap<String, String>();
         urlMap.put("analyser", "analyser-gt-desc.hfstol");
@@ -98,6 +118,11 @@ public class UralicApi {
         }
     }
 
+    /**
+     * Checks if models of a language are installed in the system
+     * @param language ISO code of the language
+     * @return language installed
+     */
     public boolean isLanguageInstalled(String language) {
         Path languageFolder = Paths.get(modelPath, language);
         return Files.exists(languageFolder);
@@ -123,6 +148,11 @@ public class UralicApi {
         return transducerCache.get(languageFolder);
     }
 
+    /**
+     * Prints out information of the model of a language
+     * @param language ISO code of the language
+     * @throws Exception metadata.json cannot be accessed
+     */
     public void modelInfo(String language) throws Exception {
         Path languageFolder = Paths.get(modelPath, language, "metadata.json");
         FileInputStream fis = new FileInputStream(languageFolder.toString());
@@ -137,6 +167,10 @@ public class UralicApi {
 
     }
 
+    /**
+     * Uninstalls the models of a language
+     * @param language ISO code of the language
+     */
     public void uninstall(String language) {
         CommonTools.deleteDir(new File(Paths.get(modelPath, language).toString()));
     }
@@ -176,10 +210,26 @@ public class UralicApi {
         return res;
     }
 
+    /**
+     * Analyzes a word morphologically
+     * @param word a single word
+     * @param language ISO code of the language
+     * @return A HashMap where the keys are possible morphological readings and values are weights given by the model
+     * @throws IOException Fails if the models are not downloaded or the transducers are not in a supported format
+     */
     public HashMap<String, Float> analyze(String word, String language) throws IOException {
         return analyze(word, language, true, false);
     }
 
+    /**
+     * Analyzes a word morphologically
+     * @param word a single word
+     * @param language ISO code of the language
+     * @param descriptive true -> descriptive model, false -> normative model
+     * @param dictionaryForms true -> dictionary model
+     * @return A HashMap where the keys are possible morphological readings and values are weights given by the model
+     * @throws IOException Fails if the models are not downloaded or the transducers are not in a supported format
+     */
     public HashMap<String, Float> analyze(String word, String language, boolean descriptive, boolean dictionaryForms) throws IOException {
         String modelName = getModelName(true, descriptive, dictionaryForms);
         Transducer t = loadTransducer(language, modelName);
@@ -187,10 +237,26 @@ public class UralicApi {
         return parseHfstResult(analyses);
     }
 
+    /**
+     * Inflects a word into a morphological form
+     * @param word a lemma and its morphological tags (following the format of analyze)
+     * @param language ISO code of the language
+     * @return A HashMap where the keys are possible inflections and values are weights given by the model
+     * @throws IOException Fails if the models are not downloaded or the transducers are not in a supported format
+     */
     public HashMap<String, Float> generate(String word, String language) throws IOException {
         return generate(word, language, false, false);
     }
 
+    /**
+     * Inflects a word into a morphological form
+     * @param word a lemma and its morphological tags (following the format of analyze)
+     * @param language ISO code of the language
+     * @param descriptive true -> descriptive model, false -> normative model
+     * @param dictionaryForms true -> dictionary model
+     * @return A HashMap where the keys are possible inflections and values are weights given by the model
+     * @throws IOException Fails if the models are not downloaded or the transducers are not in a supported format
+     */
     public HashMap<String, Float> generate(String word, String language, boolean descriptive, boolean dictionaryForms) throws IOException {
         String modelName = getModelName(false, descriptive, dictionaryForms);
         Transducer t = loadTransducer(language, modelName);
@@ -198,14 +264,39 @@ public class UralicApi {
         return parseHfstResult(analyses);
     }
 
+    /**
+     * Lemmatizes a word 
+     * @param word a single word
+     * @param language ISO code of the language
+     * @return A list of lemmas
+     * @throws IOException Fails if the models are not downloaded or the transducers are not in a supported format
+     */
     public ArrayList<String> lemmatize(String word, String language) throws IOException {
         return lemmatize(word, language, true, false, false);
     }
 
+    /**
+     * Lemmatizes a word 
+     * @param word a single word
+     * @param language ISO code of the language
+     * @param wordBoundaries set true to mark word boundaries in compound words with a pipe (|)
+     * @return A list of lemmas
+     * @throws IOException Fails if the models are not downloaded or the transducers are not in a supported format
+     */
     public ArrayList<String> lemmatize(String word, String language, boolean wordBoundaries) throws IOException {
         return lemmatize(word, language, true, false, wordBoundaries);
     }
 
+    /**
+     * Lemmatizes a word 
+     * @param word a single word
+     * @param language ISO code of the language
+     * @param descriptive true -> descriptive model, false -> normative model
+     * @param dictionaryForms true -> dictionary model
+     * @param wordBoundaries set true to mark word boundaries in compound words with a pipe (|)
+     * @return A list of lemmas
+     * @throws IOException Fails if the models are not downloaded or the transducers are not in a supported format
+     */
     public ArrayList<String> lemmatize(String word, String language, boolean descriptive, boolean dictionaryForms, boolean wordBoundaries) throws IOException {
         ArrayList<String> results = new ArrayList<String>();
         HashMap<String, Float> res = analyze(word, language, descriptive, dictionaryForms);
@@ -266,6 +357,10 @@ public class UralicApi {
       new LinkedHashSet<String>(results));
     }
 
+    /**
+     * Downloads a list of supported languages and prints it, while all of them work on Python, there might be some compatibility issues with Java
+     * @throws IOException Fails if it cannot download the list
+     */
     public void supportedLanguages() throws IOException {
         String s = CommonTools.readToString(downloadServerUrl + "supported_languages.json");
         System.out.println(s);

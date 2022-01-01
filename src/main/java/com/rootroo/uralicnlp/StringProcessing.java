@@ -22,6 +22,9 @@ public class StringProcessing {
     
     private JSONObject isoMap;
     
+    /**
+     * Initialization. This loads ISO codes to the memory.
+     */
     public StringProcessing(){
         JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader("res/lang_codes.json"))
@@ -36,10 +39,22 @@ public class StringProcessing {
         }
     }
     
+    /**
+     * Gives an English name for a 3 letter language ISO code
+     * @param isoCode 3 letter ISO code
+     * @return English name
+     */
     public String isoToName(String isoCode){
         return (String) isoMap.get(isoCode);
     }
 
+    /**
+     * Removes all non-Arabic characters
+     * @param word a word with mixed Arabic and non-Arabic characters
+     * @param keepVowels true -> keeps diacritics, false -> removes diacritics
+     * @param combineBy combines the found instances of Arabic words with this separator token
+     * @return Arabic text separated by combineBy
+     */
     public static String filterArabic(String word, boolean keepVowels, String combineBy) {
         String rege = "[ء-ي'ًٌٍَُِّْـ']+";
         if (!keepVowels) {
@@ -52,6 +67,6 @@ public class StringProcessing {
         while (matches.find()) {
             allMatches.add(matches.group());
         }
-        return String.join(",", allMatches);
+        return String.join(combineBy, allMatches);
     }
 }
