@@ -254,7 +254,7 @@ public class Tokenizer {
     }
 
     private boolean endsInAbrv(String text) {
-        Matcher matcher = abrvRegex.matcher(text);
+        Matcher matcher = abrvRegex.matcher(text.toLowerCase());
         return matcher.find();
     }
 }

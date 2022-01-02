@@ -19,15 +19,26 @@ public class App
         //api.download("eng");
         //api.download("fin_hist");
         try{
-            /*
-            Cg3 cg = new Cg3("fin");
-            List<String> sentence = new ArrayList<String>();
-            sentence.add("Kissa");
-            sentence.add("voi");
-            sentence.add("nauraa");
             
-            System.out.println(cg.disambiguate(sentence));
-            */
+            Cg3 cg = new Cg3("fin");
+            Tokenizer tokenizer = new Tokenizer();
+            String sentence = "Kissa voi nauraa";
+            List<String> tokens = tokenizer.words(sentence);
+            ArrayList<ArrayList<Cg3Word>> disambiguatedSentence = cg.disambiguate(tokens);
+            for(ArrayList<Cg3Word> wordReadings : disambiguatedSentence){
+                for(Cg3Word wordReading :wordReadings){
+                    System.out.println("Form: " + wordReading.form + " lemma " + wordReading.lemma + " morphology: " + String.join(", ", wordReading.morphology));
+                }
+                System.out.println("---");
+            }
+            
+            
+            
+            sentence = "Mr. Burns talks with Dr. Hibbert. But why?";
+            System.out.println(tokenizer.sentences(sentence));
+            System.out.println(tokenizer.words(sentence));
+            System.out.println(tokenizer.tokenize(sentence));
+            
             HashMap<String, Float> results = api.generate("voida+V+Act+Ind+Prt+Sg1", "fin");
             for(String s : results.keySet()){
                 System.out.println(s);
