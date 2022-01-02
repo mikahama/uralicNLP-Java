@@ -133,18 +133,18 @@ The result is a List of Cg3Word Lists. Because the disambiguator only narrows do
  	ArrayList<ArrayList<Cg3Word>> disambiguatedSentence = cg.disambiguate(tokens);
  	for(ArrayList<Cg3Word> wordReadings : disambiguatedSentence){
  	 	for(Cg3Word wordReading :wordReadings){
- 	 	 	System.out.println("Form: " + wordReading.form + " lemma " + wordReading.lemma + " morphology: " + String.join(", ", wordReading.morphology));
+ 	 	 	System.out.println("Form: " + wordReading.form + " lemma: " + wordReading.lemma + " morphology: " + String.join(", ", wordReading.morphology));
  	 	}
  	 	System.out.println("---");
  	}
 	
-	>>Form: Kissa lemma Kissa morphology: N, <fin>, Prop, Sem/Geo, Sg, Nom, <W:0.000000>, @SUBJ>
-	>>Form: Kissa lemma kissa morphology: N, <fin>, Sg, Nom, <W:0.000000>, @SUBJ>
-	>>Form: Kissa lemma Kissa morphology: N, <fin>, Prop, Sg, Nom, <W:0.000000>, @SUBJ>
+	>>Form: Kissa lemma: Kissa morphology: N, <fin>, Prop, Sem/Geo, Sg, Nom, <W:0.000000>, @SUBJ>
+	>>Form: Kissa lemma: kissa morphology: N, <fin>, Sg, Nom, <W:0.000000>, @SUBJ>
+	>>Form: Kissa lemma: Kissa morphology: N, <fin>, Prop, Sg, Nom, <W:0.000000>, @SUBJ>
 	>>---
-	>>Form: voi lemma voida morphology: V, <fin>, Act, Ind, Prs, Sg3, <W:0.000000>, @+FAUXV
+	>>Form: voi lemma: voida morphology: V, <fin>, Act, Ind, Prs, Sg3, <W:0.000000>, @+FAUXV
 	>>---
-	>>Form: nauraa lemma nauraa morphology: V, <fin>, Act, InfA, Sg, Lat, <W:0.000000>, @-FMAINV
+	>>Form: nauraa lemma: nauraa morphology: V, <fin>, Act, InfA, Sg, Lat, <W:0.000000>, @-FMAINV
 	>>---
 
 # Business solutions
