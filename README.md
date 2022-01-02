@@ -107,7 +107,16 @@ The output is a similar HashMap as in the case of *analyze*.
 
 # Disambiguation
 
-TBA
+The UralicNLP method *analyze* produces a list of all the possible morphological readings of a a word. It is more practical to parse full sentences because then the context can be used to disambiguate the actual morphological reading. Note: You will need to install [install VISL CG-3](https://mikalikes.men/how-to-install-visl-cg3-on-mac-windows-and-linux/) and ensure it is in the [PATH environment variable in your IDE](https://coderedirect.com/questions/264930/how-to-set-environment-variable-in-netbeans).
+
+            Cg3 cg = new Cg3("fin");
+            Tokenizer tokenizer = new Tokenizer();
+            String sentence = "Kissa voi nauraa";
+            List<String> tokens = tokenizer.words(sentence);
+            System.out.println(cg.disambiguate(tokens));
+	    >>[[<Kissa - N, <fin>, Prop, Sem/Geo, Sg, Nom, <W:0.000000>, @SUBJ>>, <kissa - N, <fin>, Sg, Nom, <W:0.000000>, @SUBJ>>, <Kissa - N, <fin>, Prop, Sg, Nom, <W:0.000000>, @SUBJ>>], [<voida - V, <fin>, Act, Ind, Prs, Sg3, <W:0.000000>, @+FAUXV>], [<nauraa - V, <fin>, Act, InfA, Sg, Lat, <W:0.000000>, @-FMAINV>]]
+
+The result is a List of Cg3Word Lists. Because the disambiguator only narrows down the possible morphological readings, each word may still have more than one reading left.
 
 # Business solutions
 
