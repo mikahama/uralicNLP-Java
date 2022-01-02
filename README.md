@@ -25,7 +25,34 @@ The models will be downloaded to *.uralicnlp* folder in your home directory.
 
 # Tokenization
 
-TBA
+You can tokenize a text into sentences and words. This method supports [abreviations in languages](https://universaldependencies.org/) that have a Universal Dependencies Treebank.
+
+	import com.rootroo.uralicnlp.Tokenizer
+	
+	Tokenizer tokenizer = new Tokenizer();
+	String sentence = "Mr. Burns talks with Dr. Hibbert. But why?";
+	System.out.println(tokenizer.tokenize(sentence));
+	>>[[Mr., Burns, talks, with, Dr., Hibbert, .], [But, why, ?]]
+
+The output is a List of tokenized sentences that are Lists of strings, where each string represents a tokenized word.
+
+It is also possible to tokenize text only on a sentence level:
+
+	import com.rootroo.uralicnlp.Tokenizer
+	
+	Tokenizer tokenizer = new Tokenizer();
+	String sentence = "Mr. Burns talks with Dr. Hibbert. But why?";
+	System.out.println(tokenizer.sentences(sentence));
+	>>[Mr. Burns talks with Dr. Hibbert., But why?]
+
+Or on a word level:
+
+	import com.rootroo.uralicnlp.Tokenizer
+	
+	Tokenizer tokenizer = new Tokenizer();
+	String sentence = "Mr. Burns talks with Dr. Hibbert. But why?";
+	System.out.println(tokenizer.words(sentence));
+	>>[Mr., Burns, talks, with, Dr., Hibbert, ., But, why, ?]
 
 # Lemmatization
 
