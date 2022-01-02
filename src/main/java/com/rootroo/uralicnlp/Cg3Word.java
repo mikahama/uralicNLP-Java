@@ -1,5 +1,5 @@
 /*
- * (C) Mika Hämäläinen 2021 CC BY-NC-ND 4.0
+ * (C) Mika Hämäläinen 2022 CC BY-NC-ND 4.0
  * Full license https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode
  */
 package com.rootroo.uralicnlp;

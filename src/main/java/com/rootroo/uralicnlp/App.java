@@ -19,6 +19,7 @@ public class App
         //api.download("eng");
         //api.download("fin_hist");
         try{
+            /*
             Cg3 cg = new Cg3("fin");
             List<String> sentence = new ArrayList<String>();
             sentence.add("Kissa");
@@ -26,7 +27,7 @@ public class App
             sentence.add("nauraa");
             
             System.out.println(cg.disambiguate(sentence));
-            
+            */
             HashMap<String, Float> results = api.generate("voida+V+Act+Ind+Prt+Sg1", "fin");
             for(String s : results.keySet()){
                 System.out.println(s);

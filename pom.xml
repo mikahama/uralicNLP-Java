@@ -29,15 +29,15 @@
         </license>
     </licenses>
 
-  <developers>
-    <developer>
-      <name>Mika Hämäläinen</name>
-      <email>mika@rootroo.com</email>
-      <url>https://mikakalevi.com</url>
-      <organization>Rootroo Ltd</organization>
-      <organizationUrl>https://rootroo.com/</organizationUrl>
-    </developer>
-  </developers>
+    <developers>
+        <developer>
+            <name>Mika Hämäläinen</name>
+            <email>mika@rootroo.com</email>
+            <url>https://mikakalevi.com</url>
+            <organization>Rootroo Ltd</organization>
+            <organizationUrl>https://rootroo.com/</organizationUrl>
+        </developer>
+    </developers>
 
     <dependencies>
         <dependency>
@@ -64,7 +64,11 @@
     </dependencies>
 
     <build>
- 
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->

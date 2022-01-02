@@ -1,5 +1,5 @@
 /*
- * (C) Mika Hämäläinen 2021 CC BY-NC-ND 4.0
+ * (C) Mika Hämäläinen 2022 CC BY-NC-ND 4.0
  * Full license https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode
  */
 package com.rootroo.uralicnlp;
@@ -42,15 +42,37 @@ public class Cg3 {
         this.language = language;
     }
 
+    /**
+     * Initializes a CG3 disambiguator for a given language
+     * @param language A language ISO code
+     */
     public Cg3(String language) {
 
         init(language, language);
     }
     
+    /**
+     * Analyzes and disambiguates a tokenized sentence
+     * @param words One tokenized sentence  e.g. ["koira", "voi", "haukkua"]
+     * @return A list of potential readings for each token in the input sentence. Ideally each list has only 1 Cg3Word object, but often a sentence cannot be fully disambiguated.
+     * @throws IOException Fails if there's an issue with the transducers or the models have not been downloaded
+     */
     public ArrayList<ArrayList<Cg3Word>> disambiguate(List<String> words) throws IOException{
         return disambiguate(words,null,true,true,null,false,null);
     }
 
+    /**
+     * Analyzes and disambiguates a tokenized sentence
+     * @param words One tokenized sentence  e.g. ["koira", "voi", "haukkua"]
+     * @param morphology_ignore_after A string for cutting off morphological analysis (can be null)
+     * @param descriptive if true -> descriptive analysis, false -> normative analysis
+     * @param remove_symbols remove FST symbols (default true)
+     * @param temp_file use a temporary file when calling cg3
+     * @param language_flags add language flags (default false)
+     * @param morphologies existing FST results for each word, if any (can be null)
+     * @return A list of potential readings for each token in the input sentence. Ideally each list has only 1 Cg3Word object, but often a sentence cannot be fully disambiguated.
+     * @throws IOException Fails if there's an issue with the transducers or the models have not been downloaded
+     */
     public ArrayList<ArrayList<Cg3Word>> disambiguate(List<String>  words, String morphology_ignore_after, boolean descriptive, boolean remove_symbols, String temp_file, boolean language_flags, List<HashMap<String, Float>> morphologies) throws IOException {
         
         words.add("");
