@@ -78,6 +78,10 @@ You can also inflect words by using the *generate* method:
 
 The output is a similar HashMap as in the case of *analyze*.
 
+# Disambiguation
+
+TBA
+
 # Business solutions
 
 <img src="https://rootroo.com/cropped-logo-01-png/" alt="Rootroo logo" width="128px" height="128px">
