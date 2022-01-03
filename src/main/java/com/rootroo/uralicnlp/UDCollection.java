@@ -4,6 +4,7 @@
  */
 package com.rootroo.uralicnlp;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -19,12 +20,13 @@ public class UDCollection implements Iterable<UDSentence> {
 
     ArrayList<UDSentence> sentences = new ArrayList<UDSentence>();
 
-    public UDCollection(Reader in) throws IOException {
+    public UDCollection(BufferedReader in) throws IOException {
         int intValueOfChar;
         String targetString = "";
-        while ((intValueOfChar = in.read()) != -1) {
-            targetString += String.valueOf(intValueOfChar);
-        }
+      String str;
+      while ((str = in.readLine()) != null) {
+          targetString += str +"\n";
+      }
         in.close();
         init(targetString);
     }

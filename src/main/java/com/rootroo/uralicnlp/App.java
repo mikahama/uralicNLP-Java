@@ -1,5 +1,10 @@
 package com.rootroo.uralicnlp;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,11 +24,23 @@ public class App
         //api.download("eng");
         //api.download("fin_hist");
         try{
-            String conl = "# text = Toinen palkinto\n1\tToinen\ttoinen\tADJ\tNum\tCase=Nom\t2\tnummod\t_\t_\n2\tpalkinto\tpalkinto\tNOUN\tN\tCase=Nom\t0\troot\t_\t_";
+            /*String conl = "# text = Toinen palkinto\n1\tToinen\ttoinen\tADJ\tNum\tCase=Nom\t2\tnummod\t_\t_\n2\tpalkinto\tpalkinto\tNOUN\tN\tCase=Nom\t0\troot\t_\t_";
             UDSentence sentence = UDTools.parseSentence(conl);
             for(UDNode word : sentence){
                 System.out.println(word.lemma + " " + word.pos + " " + word.deprelName());
             }
+            
+            FileInputStream fis = new FileInputStream("sms_giellagas-ud-test.conllu");
+            InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+            BufferedReader reader = new BufferedReader(isr);
+            UDCollection udCollection = new UDCollection(reader);
+            for(UDSentence sentence : udCollection){
+                for(UDNode word : sentence){
+                    System.out.println(word.lemma + " " + word.pos + " " + word.deprelName());
+                }
+                System.out.println("---");
+            }
+            */
             /*
             Cg3 cg = new Cg3("fin");
             Tokenizer tokenizer = new Tokenizer();
@@ -59,7 +76,7 @@ public class App
             StringProcessing st = new StringProcessing();
             System.out.println(st.isoToName("fin"));
             */
-        }catch (Exception e){
+        }catch (IOException e){
             System.out.println(e);
         }
         

@@ -73,6 +73,7 @@ public class UDTools {
                 UDRelation r = new UDRelation(nodes.get(id), other_parts[1], nodes.get(other_parts[0]), false);
             }
         }
+       
         ud_sentence.setRoot(root);
         return ud_sentence;
     }

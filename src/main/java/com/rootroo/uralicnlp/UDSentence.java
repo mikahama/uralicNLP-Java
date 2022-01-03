@@ -96,6 +96,7 @@ public class UDSentence implements Iterable<UDNode>{
     }
     
     public List<UDNode> getSortedChildren(){
+        
         List<UDNode> children = find();
         Collections.sort(children, new UDNodeComparator());
         return children;
