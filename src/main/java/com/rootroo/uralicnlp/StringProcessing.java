@@ -18,7 +18,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 /**
- *
+ * Tools for string manipulation
  * @author mikahama
  */
 public class StringProcessing {
