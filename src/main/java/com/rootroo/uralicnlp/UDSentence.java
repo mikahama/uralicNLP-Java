@@ -21,10 +21,13 @@ public class UDSentence implements Iterable<UDNode>{
     List<UDNode> children;
     List<UDNode> secondaryChildren;
     UDNode root;
+    
+    UDRootNode udRootNode;
 
     public UDSentence() {
         children = new ArrayList<UDNode>();
         secondaryChildren = new ArrayList<UDNode>();
+        udRootNode = new UDRootNode("","","","","","","");
     }
 
     public void setRoot(UDNode root) {

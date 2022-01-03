@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author mikahama
  */
-public class UDCollection implements Iterable<UDSentence>{
+public class UDCollection implements Iterable<UDSentence> {
 
     ArrayList<UDSentence> sentences = new ArrayList<UDSentence>();
 
@@ -87,8 +87,8 @@ public class UDCollection implements Iterable<UDSentence>{
         }
         return feats;
     }
-    
-    public List<String> getUniqueAttributes(String attribute){
+
+    public List<String> getUniqueAttributes(String attribute) {
         List<String> feats = new ArrayList<String>();
         for (UDSentence sentence : sentences) {
             List<String> fs = sentence.getUniqueAttributes(attribute);
@@ -117,9 +117,9 @@ public class UDCollection implements Iterable<UDSentence>{
         return results;
     }
 
-            @Override
+    @Override
     public Iterator<UDSentence> iterator() {
-        return new Iterator<UDSentence> () {
+        return new Iterator<UDSentence>() {
             private final Iterator<UDSentence> iter = sentences.iterator();
 
             @Override

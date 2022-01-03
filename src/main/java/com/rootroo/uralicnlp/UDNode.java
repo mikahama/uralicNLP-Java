@@ -29,7 +29,7 @@ public class UDNode {
     List<UDRelation> children;
     List<UDRelation> heads;
     List<UDRelation> secondaryChildren;
-    UDRelation relation;
+    //UDRelation relation;
 
     public UDNode(String id, String form, String lemma, String upostag, String xpostag, String feats, String misc) {
         this.id = id;
@@ -53,6 +53,10 @@ public class UDNode {
      */
     public String[] getFeats() {
         return getFeats("|");
+    }
+    
+    public String deprelName(){
+            return head.relation;
     }
 
     /**

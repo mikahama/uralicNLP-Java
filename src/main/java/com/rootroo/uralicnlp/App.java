@@ -12,14 +12,19 @@ public class App
 {
     public static void main( String[] args )
     {
-        UralicApi api = new UralicApi();
+        //UralicApi api = new UralicApi();
         //api.download("fra");
         //api.download("spa");
         //api.download("swe");
         //api.download("eng");
         //api.download("fin_hist");
         try{
-            
+            String conl = "# text = Toinen palkinto\n1\tToinen\ttoinen\tADJ\tNum\tCase=Nom\t2\tnummod\t_\t_\n2\tpalkinto\tpalkinto\tNOUN\tN\tCase=Nom\t0\troot\t_\t_";
+            UDSentence sentence = UDTools.parseSentence(conl);
+            for(UDNode word : sentence){
+                System.out.println(word.lemma + " " + word.pos + " " + word.deprelName());
+            }
+            /*
             Cg3 cg = new Cg3("fin");
             Tokenizer tokenizer = new Tokenizer();
             String sentence = "Kissa voi nauraa";
@@ -53,6 +58,7 @@ public class App
             
             StringProcessing st = new StringProcessing();
             System.out.println(st.isoToName("fin"));
+            */
         }catch (Exception e){
             System.out.println(e);
         }
