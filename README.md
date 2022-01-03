@@ -6,6 +6,8 @@ UralicNLP can produce **morphological analyses**, **generate morphological forms
 
 [See the list of supported languages](https://models.uralicnlp.com/nightly/)
 
+🐍 [Check out UralicNLP for Python](https://github.com/mikahama/uralicNLP)
+
 # Installation
 
 UralicNLP is available through [Maven](https://repo1.maven.org/maven2/com/rootroo/uralicnlp/), all you need to do is to add the following to your `pom.xml`:
