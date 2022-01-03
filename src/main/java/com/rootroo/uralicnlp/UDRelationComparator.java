@@ -7,7 +7,7 @@ package com.rootroo.uralicnlp;
 import java.util.Comparator;
 
 /**
- *
+ * A comparator between two UDRelation objects
  * @author mikahama
  */
 public class UDRelationComparator implements Comparator<UDRelation> {

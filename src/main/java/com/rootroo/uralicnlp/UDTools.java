@@ -9,17 +9,27 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- *
+ * Helper tools for loading UD sentences
  * @author mikahama
  */
 public class UDTools {
 
+    /**
+     * Parse a single CoNLL-U formatted sentence into a UDSentence
+     * @param sentence CoNLL-U formatted sentence
+     * @return Parsed sentence
+     */
     public static UDSentence parseSentence(String sentence) {
         sentence = sentence.replaceAll("\r", "");
         String[] list = sentence.split("\n");
         return parseSentence(Arrays.asList(list));
     }
-
+    
+    /**
+     * Parse a single CoNLL-U formatted sentence into a UDSentence
+     * @param conlluSentence CoNLL-U formatted sentence split into lines
+     * @return Parsed sentence
+     */
     public static UDSentence parseSentence(List<String> conlluSentence) {
         HashMap<String, UDNode> nodes = new HashMap<String, UDNode>();
         HashMap<String, String[]> relations = new HashMap<String, String[]>();

@@ -15,11 +15,15 @@ import java.net.URL;
 import me.tongfei.progressbar.ProgressBar;
 
 /**
- *
+ * Shared methods
  * @author mikahama
  */
 public class CommonTools {
 
+    /**
+     * Deletes a directory and its contents
+     * @param dirFile Directory to be deleted
+     */
     public static void deleteDir(File dirFile) {
         if (dirFile.isDirectory()) {
             File[] dirs = dirFile.listFiles();
@@ -30,6 +34,12 @@ public class CommonTools {
         dirFile.delete();
     }
 
+    /**
+     * Downloads a text file and returns it as a String
+     * @param targetURL URL of the text file
+     * @return The contents of the file as a string
+     * @throws IOException Fails if the file cannot be downloaded
+     */
     public static String readToString(String targetURL) throws IOException {
         URL url = new URL(targetURL);
         BufferedReader bufferedReader = new BufferedReader(
@@ -47,6 +57,13 @@ public class CommonTools {
         return stringBuilder.toString().trim();
     }
 
+    /**
+     * Downloads a file from the internet and saves it to the disk
+     * @param url URL of the file
+     * @param filePath Path where to save the file
+     * @param showProgress true to print out a progress bar
+     * @throws Exception May fail if the URL cannot be reached or the file cannot be written
+     */
     public static void downloadToFile(String url, String filePath, boolean showProgress) throws Exception {
         ProgressBar pb = null;
         BufferedInputStream in = null;

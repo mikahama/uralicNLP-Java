@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.rootroo</groupId>
-    <artifactId>UralicNLP</artifactId>
+    <artifactId>uralicnlp</artifactId>
     <version>1.0</version>
 
     <name>UralicNLP</name>
@@ -28,6 +28,12 @@
             <url>https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode</url>
         </license>
     </licenses>
+    
+    <scm>
+  <connection>scm:git:git://github.com/mikahama/uralicNLP-Java.git</connection>
+  <developerConnection>scm:git:ssh://github.com:mikahama/uralicNLP-Java.git</developerConnection>
+  <url>https://github.com/mikahama/uralicNLP-Java/tree/main</url>
+</scm>
 
     <developers>
         <developer>

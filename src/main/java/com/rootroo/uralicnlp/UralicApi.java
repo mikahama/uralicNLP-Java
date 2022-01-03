@@ -4,8 +4,6 @@
  */
 package com.rootroo.uralicnlp;
 
-import com.sun.tools.javac.util.StringUtils;
-import fi.seco.hfst.HfstOptimizedLookup;
 import fi.seco.hfst.Transducer;
 import fi.seco.hfst.Transducer.Result;
 import fi.seco.hfst.TransducerAlphabet;
@@ -30,8 +28,6 @@ import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

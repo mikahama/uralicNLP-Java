@@ -8,7 +8,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.ProcessBuilder.Redirect;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
+ * Constraint Grammar Interface
  * @author mikahama
  */
 public class Cg3 {

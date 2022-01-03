@@ -5,7 +5,7 @@
 package com.rootroo.uralicnlp;
 
 /**
- *
+ * An instance of a parsed word
  * @author mikahama
  */
 public class Cg3Word {

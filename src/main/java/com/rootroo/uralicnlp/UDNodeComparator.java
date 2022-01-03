@@ -7,7 +7,7 @@ package com.rootroo.uralicnlp;
 import java.util.Comparator;
 
 /**
- *
+ * A comparator between two UDNode objects
  * @author mikahama
  */
 public class UDNodeComparator implements Comparator<UDNode> {
