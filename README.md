@@ -149,6 +149,35 @@ The result is a List of Cg3Word Lists. Because the disambiguator only narrows do
 
 # Universal Dependencies Parser
 
+You can load a CoNLL-U formatted file and parse it by running:
+
+	import com.rootroo.uralicnlp.UDSentence
+	import com.rootroo.uralicnlp.UDCollection
+	import com.rootroo.uralicnlp.UDNode
+	
+	FileInputStream fis = new FileInputStream("sms_giellagas-ud-test.conllu");
+	InputStreamReader isr = new InputStreamReader(fis, StandardCharsets.UTF_8);
+	BufferedReader reader = new BufferedReader(isr);
+	
+	UDCollection udCollection = new UDCollection(reader);
+	for(UDSentence sentence : udCollection){
+		for(UDNode word : sentence){
+			System.out.println(word.lemma + " " + word.pos + " " + word.deprelName());
+		}
+		System.out.println("---");
+	}
+	>>son PRON nsubj
+	>>âʹtte ADV advmod:tmod
+	>>pâi ADV advmod
+	>>... PUNCT punct
+	>>---
+	>>tõt PRON nsubj
+	>>vuejjled VERB root
+	>>. PUNCT punct
+	>>---
+
+UDCollection can be initialized either with a BufferedReader or String that contains CoNLL-U formatted data. The UDCollection consists of UDSentence objects which contain UDNode objects. Each UDNode corresponds to a word of a Universal Dependencies sentence and it has information such as lemma and part of speech. [More about Universal Dependencies tags](https://universaldependencies.org/format.html).
+
 To parse an individual Universal Dependencies (CoNLL-U) formatted sentence, you can run the following:
 
 	import com.rootroo.uralicnlp.UDSentence
