@@ -147,6 +147,23 @@ The result is a List of Cg3Word Lists. Because the disambiguator only narrows do
 	>>Form: nauraa lemma: nauraa morphology: V, <fin>, Act, InfA, Sg, Lat, <W:0.000000>, @-FMAINV
 	>>---
 
+# Universal Dependencies Parser
+
+To parse an individual Universal Dependencies (CoNLL-U) formatted sentence, you can run the following:
+
+	import com.rootroo.uralicnlp.UDSentence
+	import com.rootroo.uralicnlp.UDTools
+	import com.rootroo.uralicnlp.UDNode
+	
+	String conl = "# text = Toinen palkinto\n1\tToinen\ttoinen\tADJ\tNum\tCase=Nom\t2\tnummod\t_\t_\n2\tpalkinto\tpalkinto\tNOUN\tN\tCase=Nom\t0\troot\t_\t_";
+	UDSentence sentence = UDTools.parseSentence(conl);
+	for(UDNode word : sentence){
+		System.out.println(word.lemma + " " + word.pos + " " + word.deprelName());
+	}
+	
+	>>toinen ADJ nummod
+	>>palkinto NOUN root
+
 # Business solutions
 
 <img src="https://rootroo.com/cropped-logo-01-png/" alt="Rootroo logo" width="128px" height="128px">
