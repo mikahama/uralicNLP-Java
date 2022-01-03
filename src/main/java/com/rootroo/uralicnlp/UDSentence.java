@@ -115,7 +115,7 @@ public class UDSentence implements Iterable<UDNode>{
 
             @Override
             public void remove() {
-                iter.remove();
+                //iter.remove();
             }
         };
     }
