@@ -6,7 +6,7 @@ UralicNLP can produce **morphological analyses**, **generate morphological forms
 
 # Installation
 
-UralicNLP is available through Maven, all you need to do is to add the following to your `pom.xml`:
+UralicNLP is available through [Maven](https://repo1.maven.org/maven2/com/rootroo/uralicnlp/), all you need to do is to add the following to your `pom.xml`:
 
     <dependencies>
         <dependency>
