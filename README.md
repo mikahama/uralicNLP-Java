@@ -1,14 +1,22 @@
 # UralicNLP - Multilingual Natural Language Processing for Java
 
-Note: this library is still under construction
-
 UralicNLP can produce **morphological analyses**, **generate morphological forms**, **lemmatize words** and **give lexical information** about words in Uralic and other languages. The languages we support include the following languages: Finnish, Russian, German, English, Norwegian, Swedish, Arabic, Ingrian, Meadow & Eastern Mari, Votic, Olonets-Karelian, Erzya, Moksha, Hill Mari, Udmurt, Tundra Nenets, Komi-Permyak, North Sami, South Sami and Skolt Sami. The functionality originates mainly in FST tools and dictionaries developed in the [GiellaLT infrastructure](https://giellalt.uit.no/) and [Apertium](https://github.com/apertium). Currently, UralicNLP uses nightly builds for most of the supported languages.
 
 [See the list of supported languages](https://models.uralicnlp.com/nightly/)
 
 # Installation
 
-More instructions after the first release...
+UralicNLP is available through Maven, all you need to do is to add the following to your `pom.xml`:
+
+    <dependencies>
+        <dependency>
+            <groupId>com.rootroo</groupId>
+            <artifactId>uralicnlp</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
+You can also download the JAR file from the GitHub releases page, but then you may need to download UralicNLP's dependencies by hand.
 
 If you want to use the Constraint Grammar features (com.rootroo.uralicnlp.Cg3), you will also need to [install VISL CG-3](https://mikalikes.men/how-to-install-visl-cg3-on-mac-windows-and-linux/).
 
