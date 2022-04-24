@@ -119,7 +119,7 @@ The output is a similar HashMap as in the case of *analyze*.
 
 # Disambiguation
 
-The UralicNLP method *analyze* produces a list of all the possible morphological readings of a a word. It is more practical to parse full sentences because then the context can be used to disambiguate the actual morphological reading. Note: You will need to install [install VISL CG-3](https://mikalikes.men/how-to-install-visl-cg3-on-mac-windows-and-linux/) and ensure it is in the [PATH environment variable in your IDE](https://coderedirect.com/questions/264930/how-to-set-environment-variable-in-netbeans).
+The UralicNLP method *analyze* produces a list of all the possible morphological readings of a word. It is more practical to parse full sentences because then the context can be used to disambiguate the actual morphological reading. Note: You will need to install [install VISL CG-3](https://mikalikes.men/how-to-install-visl-cg3-on-mac-windows-and-linux/) and ensure it is in the [PATH environment variable in your IDE](https://coderedirect.com/questions/264930/how-to-set-environment-variable-in-netbeans).
 
  	import com.rootroo.uralicnlp.Cg3
 	import com.rootroo.uralicnlp.Tokenizer
