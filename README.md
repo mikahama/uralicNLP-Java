@@ -37,7 +37,7 @@ The models will be downloaded to *.uralicnlp* folder in your home directory.
 
 # Tokenization
 
-You can tokenize a text into sentences and words. This method supports [abreviations in languages](https://universaldependencies.org/) that have a Universal Dependencies Treebank.
+You can tokenize a text into sentences and words. This method supports [abreviations in languages](https://universaldependencies.org/) that have appeared in a Universal Dependencies Treebank.
 
 	import com.rootroo.uralicnlp.Tokenizer
 	
