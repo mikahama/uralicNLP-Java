@@ -227,3 +227,5 @@ Hämäläinen, Mika. (2019). UralicNLP: An NLP Library for Uralic Languages. Jou
         number={37},
         pages={1345}
     }
+    
+The FST and CG tools and dictionaries come mostly from the [GiellaLT repositories](https://github.com/giellalt) and [Apertium](https://github.com/apertium).
